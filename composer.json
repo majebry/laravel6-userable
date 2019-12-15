@@ -1,0 +1,27 @@
+{
+    "name": "majebry/laravel6-userable",
+    "description": "Multiple User Type Models for Laravel 6",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hani Majebry",
+            "email": "hani.majebry@gmail.com"
+        }
+    ],
+    "require": {},
+
+    "autoload": {
+        "psr-4": {
+            "Majebry\\LaravelUserable\\": "src"
+        }
+    },
+
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Majebry\\LaravelUserable\\UserableServiceProvider"
+            ]
+        }
+    }
+}
