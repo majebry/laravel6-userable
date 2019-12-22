@@ -28,6 +28,9 @@ class User extends Authenticatable
 }
 ```
 
+So, anytime you want to call user info for any userable model you can do `Model::find($id)->userable`
+
+
 3. Now, for example, if we want to generate a *user-type* called `Customer`, we run the following command
 
 ```bash
@@ -38,26 +41,7 @@ This command will generate a `Customer` model under `app` directory
 and a `x_create_customers_table.php` under `database\migrations` directory
 You can add the fields that you wish to that migration before running it
 
-4. Add the following middleware to `app\Http\Kernel.php`
-
-```php
-
-```
-
-you may wish to update the `$guard_name` attribute and reference a relationship to Laravel's `User` model
-(especially if you want to use laravel-permission pacakge in this model) .... bla
-
-```php
-protected $guard_name = 'api';
-
-public function user()
-{
-    return $this->morphOne('App\User', 'userable');
-}
-```
-So, anytime you want to call user info for any userable model you can do `Model::find($id)->userable`
-
-5. In app/Http/Kernal.php, register the following middlewares
+4. In app/Http/Kernal.php, register the following middleware
 ```php
 protected $routeMiddleware = [
     // ...
