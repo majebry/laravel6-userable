@@ -16,17 +16,14 @@ class UserTypeMiddleware
      */
     public function handle($request, Closure $next, $userType)
     {
-        $model = [
-            'Majebry\\LaravelAuthWrapper\\' . Str::studly($userType),
-            'App\\' . Str::studly($userType)
-        ];
+        if ($user = auth('api')->user()) {
+            $userableTypeNamespace = explode('\\', $user->userable_type);
 
-        $user = auth('api')->user();
-
-        if (!$user || ($user && !in_array($user->userable_type, $model))) {
-            abort(403);
+            if (end($userableTypeNamespace) === Str::studly($userType)) {
+                return $next($request);
+            }
         }
 
-        return $next($request);
+        abort(403);
     }
 }
