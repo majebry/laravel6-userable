@@ -14,9 +14,9 @@ class UserTypeMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $userType)
+    public function handle($request, Closure $next, $userType, $guard = null)
     {
-        if ($user = auth('api')->user()) {
+        if ($user = auth($guard)->user()) {
             $userableTypeNamespace = explode('\\', $user->userable_type);
 
             if (end($userableTypeNamespace) === Str::studly($userType)) {
